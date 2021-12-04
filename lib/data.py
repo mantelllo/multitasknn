@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def load_data(csv_path):
     df = pd.read_csv(csv_path)
     assert_right_columns(df)
@@ -11,12 +12,10 @@ def load_data(csv_path):
     return to_X_y(df)
 
 
-
 def to_X_y(df):
     X = df.drop(['DatasetID', 'y1', 'y2'], axis=1).fillna(0).to_numpy()
     y = df[['y1', 'y2']].to_numpy()
     return X, y
-
 
 
 def split_train_test(X, y, test_split=0.2):
@@ -50,7 +49,6 @@ def balance_dataset(df):
     d2_size = df[df.DatasetID == 2].shape[0]
 
     def upsample(df, DatasetID, num):
-        print(f'Sampling from dataset {DatasetID} {num} samples')
         return pd.concat([df, df[df.DatasetID==DatasetID].sample(n=num, replace=True)], axis=0)
 
     if (d1_size > d2_size):

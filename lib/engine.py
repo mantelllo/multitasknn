@@ -11,6 +11,7 @@ class Engine:
     def load_data(self, path):
         if not os.path.isfile(path):
             raise ValueError(f'File not found: {path}')
+        print(f'Using {path} as input file')
         X, y = load_data(path)
         return X, y
 
